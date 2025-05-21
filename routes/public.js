@@ -5,7 +5,7 @@ import { PrismaClient } from '../generated/prisma/index.js';
 const router = express.Router();
 const prisma = new PrismaClient();
 
-// Cadastro 
+// Cadastro
 router.post('/cadastro', async (req, res) => {
     try {
         const user = req.body;
@@ -22,6 +22,17 @@ router.post('/cadastro', async (req, res) => {
         });
 
         res.status(201).json(userDB);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Erro no Servidor, tente novamente",err });
+    }
+});
+
+// Listagem
+router.get('/lista', async (req, res) => {
+    try {
+        const users = await prisma.user.findMany();
+        res.status(200).json(users);
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Erro no Servidor, tente novamente",err });

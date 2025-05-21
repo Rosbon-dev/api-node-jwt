@@ -7,7 +7,5 @@ app.use(express.json())
 
 app.use('/', publicRoutes)
 
-
-
 app.listen(3000, () => console.log("Servidor rodando"))
 
